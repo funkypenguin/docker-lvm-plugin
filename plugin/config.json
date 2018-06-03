@@ -1,0 +1,44 @@
+{
+  "Args": {
+    "Description": "LVM volume group to create volumes in.",
+    "Name": "VOLUME_GROUP",
+    "Settable": ["value"],
+    "Value": null
+  },
+  "Description": "LVM volume plugin for Docker",
+  "Documentation": "https://docs.docker.com/engine/extend/plugins/",
+  "Entrypoint": ["/usr/libexec/docker/docker-lvm-plugin"],
+  "Env": [],
+  "Interface": {
+    "Types": ["docker.volumedriver/1.0"]
+  },
+  "Linux": {
+    "Capabilities": ["ALL"],
+    "AllowAllDevices": false,
+    "Devices": null
+  },
+  "Mounts": [
+    {
+      "name": "/dev/log",
+      "description": "Syslog device",
+      "source": "/dev/log",
+      "destination": "/dev/log",
+      "type": "bind",
+      "options": []
+    },
+    {
+      "name": "/dev/mapper",
+      "description": "Devicemapper device tree",
+      "source": "/dev/mapper",
+      "destination": "/dev/mapper",
+      "type": "bind",
+      "options": []
+    }
+  ],
+  "Network": {
+    "Type": "none"
+  },
+  "PropagatedMount": null,
+  "User": {},
+  "Workdir": ""
+}

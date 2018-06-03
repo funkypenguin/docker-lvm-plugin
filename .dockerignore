@@ -1,0 +1,7 @@
+*
+!etc/
+!Godeps/
+!man/
+!systemd/
+!*.go
+!Makefile

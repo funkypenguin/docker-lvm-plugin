@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/docker/go-plugins-helpers/volume"
 )
 
@@ -41,11 +41,11 @@ func main() {
 
 	if _, err := os.Stat(lvmHome); err != nil {
 		if !os.IsNotExist(err) {
-			logrus.Fatal(err)
+			logrus.WithFields(logrus.Fields{"err": err, "home": lvmHome}).Fatal("Cannot stat home")
 		}
 		logrus.Debugf("Created home dir at %s", lvmHome)
 		if err := os.MkdirAll(lvmHome, 0700); err != nil {
-			logrus.Fatal(err)
+			logrus.WithFields(logrus.Fields{"err": err, "home": lvmHome}).Fatal("Cannot create home")
 		}
 	}
 
@@ -57,12 +57,12 @@ func main() {
 	// Call loadFromDisk only if config file exists.
 	if _, err := os.Stat(lvmVolumesConfigPath); err == nil {
 		if err := loadFromDisk(lvm); err != nil {
-			logrus.Fatal(err)
+			logrus.WithFields(logrus.Fields{"err": err}).Fatal("Cannot load config from disk")
 		}
 	}
 
 	h := volume.NewHandler(lvm)
 	if err := h.ServeUnix("lvm", 0); err != nil {
-		logrus.Fatal(err)
+		logrus.WithFields(logrus.Fields{"err": err}).Fatal("Cannot serve unix socket")
 	}
 }
