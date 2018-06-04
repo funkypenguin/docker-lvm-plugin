@@ -6,8 +6,8 @@ import (
 	"os/exec"
 	"sync"
 
-	"github.com/sirupsen/logrus"
 	"github.com/docker/go-plugins-helpers/volume"
+	"github.com/sirupsen/logrus"
 )
 
 type lvmDriver struct {

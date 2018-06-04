@@ -3,21 +3,21 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
-	"github.com/sirupsen/logrus"
 	"github.com/docker/go-plugins-helpers/volume"
+	"github.com/sirupsen/logrus"
+	"os"
 )
 
 const (
-	lvmHome = "/var/lib/docker-lvm-plugin"
+	lvmHome              = "/var/lib/docker-lvm-plugin"
 	lvmVolumesConfigPath = "/var/lib/docker-lvm-plugin/lvmVolumesConfig.json"
-	lvmCountConfigPath = "/var/lib/docker-lvm-plugin/lvmCountConfig.json"
-	socket = "/run/docker/plugins/lvm.sock"
+	lvmCountConfigPath   = "/var/lib/docker-lvm-plugin/lvmCountConfig.json"
+	socket               = "/run/docker/plugins/lvm.sock"
 )
 
 var (
-	flVersion *bool
-	flDebug *bool
+	flVersion  *bool
+	flDebug    *bool
 	flVgConfig *string
 )
 

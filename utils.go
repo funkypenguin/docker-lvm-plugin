@@ -27,7 +27,7 @@ func removeLogicalVolume(name, vgName string) ([]byte, error) {
 
 func getVolumegroupName(vgConfig string) (string, error) {
 	vgName, err := os.LookupEnv(vgConfig)
-	if ! err {
+	if !err {
 		return "", fmt.Errorf("expected volume group environment variable named %s", vgConfig)
 	}
 
