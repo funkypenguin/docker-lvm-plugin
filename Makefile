@@ -1,4 +1,4 @@
-plugin/rootfs create push enable install: name := nickbreen/docker-lvm-plugin
+name := nickbreen/docker-lvm-plugin
 
 .PHONY: create
 create: config.json plugin/rootfs
@@ -18,7 +18,6 @@ push: create
 .PHONY: enable
 enable: create
 	docker plugin ls | grep $(name)
-	docker plugin set $(name) VOLUME_GROUP=skull
 	docker plugin enable $(name)
 
 .PHONY: clean
