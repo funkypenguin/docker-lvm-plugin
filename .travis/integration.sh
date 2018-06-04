@@ -3,8 +3,8 @@
 set -e -x -o pipefail
 
 setup() {
-    dd if=/dev/zero of=/tmp/loop0.img bs=$1 count=1M
-    sudo losetup /dev/loop0 /tmp/loop0.img
+    dd if=/dev/zero of=/loop0.img bs=$1 count=1M
+    sudo losetup /dev/loop0 /loop0.img
     sudo sfdisk /dev/loop0 <<< ",,8e,,"
     sudo pvcreate /dev/loop0 -f
     sudo vgcreate test-vg /dev/loop0
@@ -14,7 +14,7 @@ teardown() {
     sudo lvremove test-vg -f || true
     sudo vgremove test-vg -f || true
     sudo losetup --detach /dev/loop0 || true
-    rm -f /tmp/loop0.img
+    rm -f /loop0.img
 }
 
 expected_vgs() {
