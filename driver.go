@@ -69,7 +69,7 @@ func (l *lvmDriver) Create(req *volume.CreateRequest) error {
 		}
 		if isThinSnap, err = isThinlyProvisioned(vgName, snap); err != nil {
 			logrus.WithError(err).Error("Create: lvdisplayGrep error")
-			return fmt.Errorf("error creating volume")
+			return fmt.Errorf("error creating volume from snapshot")
 		}
 	}
 	s, ok := req.Options["size"]
@@ -99,8 +99,8 @@ func (l *lvmDriver) Create(req *volume.CreateRequest) error {
 	}
 	cmd := exec.Command("lvcreate", cmdArgs...)
 	if out, err := cmd.CombinedOutput(); err != nil {
-		logrus.WithError(err).WithField("out", string(out)).Error("create: lvcreate error")
-		return fmt.Errorf("error creating volume")
+		logrus.WithError(err).WithField("out", string(out)).Errorf("create: lvcreate error")
+		return fmt.Errorf("error creating volume: %s", string(out))
 	}
 
 	defer func() {
