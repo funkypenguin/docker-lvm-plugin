@@ -5,8 +5,6 @@ matrix:
   include:
   - language: go
     go: 1.10.x
-    env: TESTFILE=unit.sh
-  - language: generic
     sudo: required
     services:
     - docker
@@ -17,8 +15,9 @@ matrix:
     - sudo apt-get -y install docker-ce lvm
 
 script:
-- ./.travis/integration-1.sh
-- ./.travis/integration-2.sh
-- ./.travis/integration-3a.sh
-- ./.travis/integration-3b.sh
-- ./.travis/integration-4.sh
+- .travis/unit.sh
+- .travis/integration-1.sh
+- .travis/integration-2.sh
+- .travis/integration-3a.sh
+- .travis/integration-3b.sh
+- .travis/integration-4.sh
