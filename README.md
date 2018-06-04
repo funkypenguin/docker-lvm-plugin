@@ -1,4 +1,6 @@
-# LVM Volume Plugin
+# LVM Volume Plugin 
+
+[![Build Status](https://travis-ci.org/nickbreen/docker-lvm-plugin.svg?branch=master)](https://travis-ci.org/nickbreen/docker-lvm-plugin)
 
 Docker Volume Driver plugin for LVM volumes
 
