@@ -19,6 +19,16 @@
     "AllowAllDevices": true,
     "Devices": null
   },
+  "Mounts": [
+    {
+      "description": "Device access for devicemapper (/dev/mapper/*, /dev/*/*)",
+      "destination": "/dev",
+      "options": ["rbind"],
+      "name": "dev",
+      "source": "/dev",
+      "type": "bind"
+    }
+  ],
   "Network": {
     "Type": "host"
   }
