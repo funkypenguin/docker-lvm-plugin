@@ -28,6 +28,8 @@ func init() {
 
 func main() {
 
+	logrus.WithFields(logrus.Fields{"args": os.Args}).Info("Arguments");
+
 	flag.Parse()
 
 	if *flVersion {
