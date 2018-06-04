@@ -1,15 +1,11 @@
 FROM golang:1.10-alpine AS builder
 
+RUN apk add --no-cache gcc libc-dev
 COPY . /go/src/github.com/nickbreen/docker-lvm-plugin
 WORKDIR /go/src/github.com/nickbreen/docker-lvm-plugin
-RUN set -ex \
-    && apk add --no-cache --virtual .build-deps gcc libc-dev \
-    && go install --ldflags '-extldflags "-static"' \
-    && apk del .build-deps
-CMD [ "/go/bin/docker-lvm-plugin" ]
+RUN go install --ldflags '-extldflags "-static"'
 
 FROM alpine
-RUN apk update && apk add lvm2
+RUN apk update && apk add lvm2 xfsprogs cryptsetup
 RUN mkdir -p /run/docker/plugins
-COPY --from=builder /go/bin/docker-lvm-plugin .
-CMD ["docker-lvm-plugin"]
+COPY --from=builder /go/bin/docker-lvm-plugin /

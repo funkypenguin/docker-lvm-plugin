@@ -1,14 +1,13 @@
 {
-  "Args": null,
   "Description": "LVM volume plugin for Docker",
   "Documentation": "https://docs.docker.com/engine/extend/plugins/",
-  "Entrypoint": ["/usr/libexec/docker/docker-lvm-plugin"],
+  "Entrypoint": ["/docker-lvm-plugin", "-debug"],
   "Env": [
     {
-      "name": "VOLUME_GROUP",
+      "Name": "VOLUME_GROUP",
       "Description": "LVM volume group to create volumes in.",
-      "settable": ["value"],
-      "value": null
+      "Settable": ["value"],
+      "Value": null
     }
   ],
   "Interface": {
@@ -20,11 +19,7 @@
     "AllowAllDevices": true,
     "Devices": null
   },
-  "Mounts": null,
   "Network": {
     "Type": "host"
-  },
-  "PropagatedMount": null,
-  "User": {},
-  "Workdir": ""
+  }
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -27,33 +26,13 @@ func removeLogicalVolume(name, vgName string) ([]byte, error) {
 }
 
 func getVolumegroupName(vgConfig string) (string, error) {
-	vgName := ""
-	inFile, err := os.Open(vgConfig)
-	if err != nil {
-		return "", err
-	}
-	defer inFile.Close()
-	scanner := bufio.NewScanner(inFile)
-	scanner.Split(bufio.ScanLines)
-
-	for scanner.Scan() {
-		str := scanner.Text()
-		if strings.HasPrefix(str, "#") {
-			continue
-		}
-		vgSlice := strings.SplitN(str, "=", 2)
-		if !allowedConfKeys[vgSlice[0]] || len(vgSlice) == 1 {
-			continue
-		}
-		vgName = vgSlice[1]
-		break
-	}
-	if err := scanner.Err(); err != nil {
-		return "", err
+	vgName, err := os.LookupEnv(vgConfig)
+	if ! err {
+		return "", fmt.Errorf("expected volume group environment variable named %s", vgConfig)
 	}
 
 	if vgName == "" {
-		return "", fmt.Errorf("Volume group name must be provided for volume creation. Please update the config file %s with volume group name.", vgConfig)
+		return "", fmt.Errorf("volume group name must be provided for volume creation. Specify with the %s environment variable", vgConfig)
 	}
 
 	return strings.TrimSpace(vgName), nil
