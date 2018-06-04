@@ -11,8 +11,8 @@ setup() {
 }
 
 teardown() {
-    sudo lvremove test-vg -y || true
-    sudo vgremove test-vg -y || true
+    sudo lvremove test-vg -f || true
+    sudo vgremove test-vg -f || true
     sudo losetup --detach /dev/loop0 || true
     rm -f /tmp/loop0.img
 }
