@@ -11,7 +11,7 @@ sudo docker volume create --driver nickbreen/docker-lvm-plugin \
     --opt size=128M \
     --name test-lv
 
-sudo lvs --no-headings --options lv_name | grep test-lv
-expectedVgs
+expected_lvs test-lv
+expected_vgs
 
 sudo docker volume rm test-lv

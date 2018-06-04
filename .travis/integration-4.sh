@@ -13,4 +13,7 @@ sudo docker volume create --driver nickbreen/docker-lvm-plugin \
     --opt keyfile=/tmp/key.bin \
     --name test-crypt
 
+expected_lvs test-crypt
+expected_vgs
+
 sudo docker volume rm test-crypt

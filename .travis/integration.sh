@@ -17,8 +17,12 @@ teardown() {
     rm -f /tmp/loop0.img
 }
 
-expectedVgs() {
-    sudo vgs -S vg_name=test-vg
+expected_vgs() {
+    sudo vgs | grep test-vg
+}
+
+expected_lvs() {
+    sudo lvs --options lv_name | grep $1
 }
 
 plugin() {
