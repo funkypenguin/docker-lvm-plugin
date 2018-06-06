@@ -7,5 +7,5 @@ RUN go install --ldflags '-extldflags "-static"'
 
 FROM alpine
 RUN apk update && apk add lvm2 xfsprogs cryptsetup thin-provisioning-tools
-RUN mkdir -p /run/docker/plugins
+RUN mkdir -p /var/lib/docker-lvm-plugin
 COPY --from=builder /go/bin/docker-lvm-plugin /

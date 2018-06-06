@@ -13,7 +13,8 @@ sudo docker volume create --driver nickbreen/docker-lvm-plugin \
     --opt size=192M \
     --name test-thin-snapshot
 
-expected_lvs test-snapshot
+expected_manifest test-thin-snapshot
+expected_lvs test-thin-snapshot
 expected_vgs
 
 sudo docker volume rm test-lv test-thin-snapshot

@@ -31,5 +31,6 @@
   ],
   "Network": {
     "Type": "host"
-  }
+  },
+  "PropagatedMount": "/var/lib/docker-lvm-plugin"
 }

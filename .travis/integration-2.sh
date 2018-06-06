@@ -11,6 +11,7 @@ sudo docker volume create --driver nickbreen/docker-lvm-plugin \
     --opt thinpool=test-thinpool \
     --name test-thin-lv
 
+expected_manifest test-thin-lv
 expected_lvs test-thin-lv
 expected_vgs
 

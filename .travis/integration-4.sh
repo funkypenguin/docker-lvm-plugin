@@ -7,12 +7,14 @@
 #     use the same key file. The key file must be present when the volume is
 #     created, and when it is mounted to a container.
 
-dd if=/dev/urandom of=/tmp/key.bin bs=512 count=4
+D=$(sudo find /var/lib/docker/plugins -type d -name docker-lvm-plugin)
+sudo dd if=/dev/urandom of=$D/key.bin bs=512 count=4
 sudo docker volume create --driver nickbreen/docker-lvm-plugin \
     --opt size=192M \
-    --opt keyfile=/tmp/key.bin \
+    --opt keyfile=/var/lib/docker-lvm-plugin/key.bin \
     --name test-crypt
 
+expected_manifest test-crypt
 expected_lvs test-crypt
 expected_vgs
 

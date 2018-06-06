@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e -x -o pipefail
+set -e -o pipefail
 
 setup() {
     sudo dd if=/dev/zero of=/loop0.img bs=$1 count=1M
@@ -11,6 +11,7 @@ setup() {
 }
 
 teardown() {
+    sudo docker plugin rm nickbreen/docker-lvm-plugin --force
     sudo lvremove test-vg -f || true
     sudo vgremove test-vg -f || true
     sudo losetup --detach /dev/loop0 || true
@@ -22,7 +23,11 @@ expected_vgs() {
 }
 
 expected_lvs() {
-    sudo lvs --options lv_name | grep $1
+    sudo lvs --options lv_name | env GREP_COLORS="ms=01;32" grep --color $1
+}
+
+expected_manifest() {
+    sudo jq -e ".[\"$1\"]" $(sudo find /var/lib/docker/plugins -type d -name docker-lvm-plugin)/lvmVolumesConfig.json
 }
 
 plugin() {
@@ -34,6 +39,7 @@ plugin() {
     # list enabled plugins
     sudo docker plugin ls --filter enabled=true | grep nickbreen/docker-lvm-plugin
 }
+
 
 trap "teardown" EXIT
 

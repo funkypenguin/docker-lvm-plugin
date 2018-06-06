@@ -13,6 +13,7 @@ sudo docker volume create --driver nickbreen/docker-lvm-plugin \
     --opt size=192M \
     --name test-snapshot
 
+expected_manifest test-snapshot
 expected_lvs test-snapshot
 expected_vgs
 
