@@ -27,7 +27,8 @@ expected_lvs() {
 }
 
 expected_manifest() {
-    sudo jq -e ".[\"$1\"]" $(sudo find /var/lib/docker/plugins -type d -name docker-lvm-plugin)/lvmVolumesConfig.json
+    d=$(sudo find /var/lib/docker/plugins -type d -name docker-lvm-plugin | tee /dev/stderr)
+    sudo find $d -name \*.json | sudo xargs jq -e ".[\"$1\"]"
 }
 
 plugin() {
