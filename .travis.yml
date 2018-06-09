@@ -5,6 +5,7 @@ matrix:
   include:
   - language: go
     go: 1.10.x
+    dist: xenial
     sudo: required
     services:
     - docker

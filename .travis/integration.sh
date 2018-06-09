@@ -44,5 +44,5 @@ plugin() {
 
 trap "teardown" EXIT
 
-setup 1024
+setup 96
 plugin

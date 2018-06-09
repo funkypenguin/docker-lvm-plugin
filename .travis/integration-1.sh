@@ -6,7 +6,7 @@ set -e -o pipefail
 # 1.  Create an LVM volume
 
 sudo docker volume create --driver nickbreen/docker-lvm-plugin \
-    --opt size=128M \
+    --opt size=32M \
     --name test-lv
 
 expected_manifest test-lv

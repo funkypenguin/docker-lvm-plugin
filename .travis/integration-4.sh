@@ -10,7 +10,7 @@
 D=$(sudo find /var/lib/docker/plugins -type d -name docker-lvm-plugin)
 sudo dd if=/dev/urandom of=$D/key.bin bs=512 count=4
 sudo docker volume create --driver nickbreen/docker-lvm-plugin \
-    --opt size=192M \
+    --opt size=32M \
     --opt keyfile=/var/lib/docker-lvm-plugin/key.bin \
     --name test-crypt
 

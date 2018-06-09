@@ -4,10 +4,10 @@
 
 # 2.  Create a thinly-provisioned LVM volume named
 
-sudo lvcreate --size 256M --thin test-vg/test-thinpool
+sudo lvcreate --size 64M --thin test-vg/test-thinpool
 
 sudo docker volume create --driver nickbreen/docker-lvm-plugin \
-    --opt size=128M \
+    --opt size=32M \
     --opt thinpool=test-thinpool \
     --name test-thin-lv
 

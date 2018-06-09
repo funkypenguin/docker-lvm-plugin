@@ -38,27 +38,31 @@ func main() {
 
 	if *flDebug {
 		logrus.SetLevel(logrus.DebugLevel)
-		logrus.WithField("args", os.Args).Debug("Arguments")
+		logrus.WithField("args", os.Args).Debug("arguments")
 	}
 
 	if _, err := os.Stat(lvmHome); err != nil {
 		if !os.IsNotExist(err) {
-			logrus.WithError(err).WithField("home", lvmHome).Fatal("Cannot stat home")
+			logrus.WithError(err).WithField("home", lvmHome).Fatal("cannot stat home")
 		}
 		logrus.WithField("home", lvmHome).Debug("Created home dir")
 		if err := os.MkdirAll(lvmHome, 0700); err != nil {
-			logrus.WithError(err).WithField("home", lvmHome).Fatal("Cannot create home")
+			logrus.WithError(err).WithField("home", lvmHome).Fatal("cannot create home")
 		}
 	}
 
 	lvm, err := newDriver(lvmHome, *flVgConfig)
 	if err != nil {
-		logrus.WithError(err).Fatal("Error initializing lvmDriver")
+		logrus.WithError(err).Fatal("error initializing lvmDriver")
+	}
+
+	if err := loadFromDisk(lvm); err != nil {
+		logrus.WithError(err).Fatal("error restoring lvmDriver volume map")
 	}
 
 	h := volume.NewHandler(lvm)
 	logrus.WithField("handler", h).Debug("new handler")
 	if err := h.ServeUnix(socket, 0); err != nil {
-		logrus.WithError(err).Fatal("Cannot serve unix socket")
+		logrus.WithError(err).Fatal("cannot serve unix socket")
 	}
 }
