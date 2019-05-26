@@ -1,0 +1,7 @@
+notifications:
+  email: false
+
+matrix:
+  include:
+  - language: go
+    go: 1.12.x
