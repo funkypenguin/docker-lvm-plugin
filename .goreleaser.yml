@@ -20,7 +20,7 @@ archives:
     format: tar.gz
     wrap_in_directory: true
     files:
-    - none*
+    - systemd/*
     replacements:
       darwin: Darwin
       linux: Linux
@@ -32,6 +32,7 @@ checksum:
 snapshot:
   name_template: "{{ .Tag }}-next"
 changelog:
+  skip: true
   sort: asc
   filters:
     exclude:
