@@ -56,4 +56,5 @@ This will create a snapshot volume of `foobar` named `foobar_snapshot`. For thin
 ```bash
 docker volume create -d lvm --opt size=0.2G --opt keyfile=/root/key.bin --name crypt_vol
 ```
+
 This will create a LUKS encrypted lvm volume named `crypt_vol` with the contents of `/root/key.bin` as a binary passphrase. Snapshots of encrypted volumes use the same key file. The key file must be present when the volume is created, and when it is mounted to a container.
